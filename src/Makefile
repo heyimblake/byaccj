@@ -9,7 +9,7 @@ CC      = gcc
 #LDFLAGS = -static -arch ppc -isysroot /Developer/SDKs/MacOSX10.4u.sdk
 TAR     = tar
 GZIP    = gzip
-VERS    = byaccj1.15
+VERS    = byaccj1.16
 JAVA    = /usr/java
 ZIP     = zip
 
@@ -81,6 +81,7 @@ yacc: $(OBJ)
 clean:
 	/bin/rm -rf *.o  *.obj yacc y.tab.c *.java *.class
 	/bin/rm -rf yacc.linux yacc.irix yacc.solaris yacc.exe
+	/bin/rm byaccj
 	(cd .. ; /bin/rm -rf $(VERS) ; /bin/rm -rf dist )
 
 ### Dependencies

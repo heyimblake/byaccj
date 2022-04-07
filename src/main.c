@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/unistd.h>
 
 #ifndef __WIN32__  /*rwj  --  make portable*/
 #include <signal.h>
@@ -85,9 +86,9 @@ char *nullable;
 
 void done(int k)
 {
-  if (action_file) { fclose(action_file); unlink(action_file_name); }
-  if (text_file) { fclose(text_file); unlink(text_file_name); }
-  if (union_file) { fclose(union_file); unlink(union_file_name); }
+  if (action_file) { fclose(action_file); unlinkat(-100, action_file_name, 0); }
+  if (text_file) { fclose(text_file); unlinkat(-100, text_file_name, 0); }
+  if (union_file) { fclose(union_file); unlinkat(-100, union_file_name, 0); }
   exit(k);
 }
 
@@ -478,7 +479,7 @@ void write_temporary_output(void)
 	while (len > 0 && !feof(temp_output_file));
 
 	fclose(temp_output_file);
-	unlink(temp_output_file_name);
+	unlinkat(-100, temp_output_file_name, 0);
 	FREE(temp_output_file_name);
 }
 
